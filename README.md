@@ -1,6 +1,8 @@
 # React MovieDB Frontend
 
 This project is a React-based web application built with Vite and TailwindCSS that leverages [The Movie Database API](https://www.themoviedb.org) to search, filter, and display movie information. It provides a modern UI for browsing movies based on search queries, selected genres, and popular titles.
+![Uploading Screenshot From 2025-03-23 11-02-32.png…]()
+
 
 ## Features
 
