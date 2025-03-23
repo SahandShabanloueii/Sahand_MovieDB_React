@@ -1,12 +1,33 @@
-# React + Vite
+# React MovieDB Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a React-based web application built with Vite and TailwindCSS that leverages [The Movie Database API](https://www.themoviedb.org) to search, filter, and display movie information. It provides a modern UI for browsing movies based on search queries, selected genres, and popular titles.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Movie Search:** Find movies using free-text search.
+- **Genre Filtering:** Filter search results by selected genres.
+- **Popular Movies:** Browse trending and popular movies.
+- **Responsive UI:** Built with React and TailwindCSS for a sleek, modern look.
+- **Fast Development:** Powered by Vite for lightning-fast HMR (Hot Module Replacement).
 
-## Expanding the ESLint configuration
+## Project Structure
 
-If you are developing a production application, we recommend using TypeScript and enable type-aware lint rules. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **src/**: Contains your React components, contexts, and styles.
+- **public/**: Contains static assets.
+- **package.json**: Lists project dependencies and scripts.
+- **vite.config.js**: Configuration file for Vite.
+
+## Getting Started
+
+### Prerequisites
+
+- **Node.js** (v14 or later)
+- **npm** (or yarn)
+
+### Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/SahandShabanloueii/Sahand_MovieDB_React.git
+   cd Sahand_MovieDB_React
