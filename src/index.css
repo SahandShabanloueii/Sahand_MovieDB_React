@@ -1,0 +1,67 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    @apply bg-black text-white min-h-screen;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply px-4 py-2 rounded-md transition-all duration-200 ease-in-out;
+  }
+  
+  .btn-primary {
+    @apply bg-netflix-red text-white hover:bg-netflix-red-hover;
+  }
+  
+  .input {
+    @apply px-4 py-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:border-netflix-red text-white;
+  }
+
+  .movie-card {
+    @apply bg-gray-900 rounded-lg overflow-hidden transition-all duration-300 ease-in-out hover:-translate-y-1 hover:shadow-lg flex flex-col h-full;
+  }
+
+  .movie-poster {
+    @apply relative w-full pt-[150%] overflow-hidden;
+  }
+
+  .movie-poster img {
+    @apply absolute top-0 left-0 w-full h-full object-cover transition-transform duration-300 ease-in-out group-hover:scale-105;
+  }
+
+  .movie-overlay {
+    @apply absolute inset-0 bg-gradient-to-b from-black/20 to-black/60 opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100 flex justify-end items-start p-4;
+  }
+
+  .favorite-btn {
+    @apply w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-2xl transition-all duration-200 ease-in-out hover:scale-110 hover:bg-black/70;
+  }
+
+  .movie-info {
+    @apply p-4 flex flex-col flex-grow gap-2;
+  }
+
+  .movie-title {
+    @apply text-lg font-medium text-white line-clamp-2;
+  }
+
+  .movie-meta {
+    @apply flex justify-between items-center text-gray-400 text-sm;
+  }
+
+  .movie-genres {
+    @apply flex flex-wrap gap-2 my-2;
+  }
+
+  .genre-tag {
+    @apply bg-gray-800 text-white px-2 py-1 rounded text-sm;
+  }
+
+  .view-details-btn {
+    @apply mt-auto bg-netflix-red text-white px-4 py-2 rounded text-center transition-colors duration-200 ease-in-out hover:bg-netflix-red-hover;
+  }
+} 
