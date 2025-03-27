@@ -1,7 +1,7 @@
 import MovieCard from "../components/MovieCard";
 import GenreFilter from "../components/GenreFilter";
 import { useState, useEffect } from "react";
-import { getPopularMovies, searchMovies, searchAndGetMoviesByGenre, getMoviesByGenre, getGenres } from "../services/api";
+import { getPopularMovies, searchMovies, getMoviesByGenre, getGenres } from "../services/api";
 import { useLanguage } from "../contexts/LanguageContext";
 import ErrorBoundary from "../components/ErrorBoundary";
 import "../css/Home.css";
