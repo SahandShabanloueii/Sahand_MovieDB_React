@@ -1,3 +1,9 @@
+.favorites-container {
+  min-height: 100vh;
+  background: #141414;
+  padding: 2rem;
+}
+
 .favorites {
   padding: 2rem;
   width: 100%;
