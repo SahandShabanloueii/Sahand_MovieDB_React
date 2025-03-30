@@ -118,7 +118,7 @@ function Home() {
 
     return (
         <ErrorBoundary>
-            <div className="min-h-screen bg-background-gray p-8 md:p-4">
+            <div className="min-h-screen bg-background p-8 md:p-4">
                 <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-8">
                     <div className="w-full lg:w-[300px] lg:flex-shrink-0">
                         <GenreFilter

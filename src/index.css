@@ -4,21 +4,40 @@
 
 @layer base {
   body {
-    @apply bg-background-gray text-white min-h-screen;
+    @apply bg-background text-white min-h-screen;
+  }
+}
+
+@layer utilities {
+  /* Custom Scrollbar */
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-darker;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-netflix-red rounded;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-netflix-red-hover;
   }
 }
 
 @layer components {
-  .btn {
-    @apply px-4 py-2 rounded-md transition-all duration-200 ease-in-out;
-  }
-  
   .btn-primary {
-    @apply bg-netflix-red text-white hover:bg-netflix-red-hover;
+    @apply bg-netflix-red text-white px-6 py-3 rounded-md text-base transition-all duration-300 ease-in-out hover:bg-netflix-red-hover hover:-translate-y-0.5;
   }
   
-  .input {
-    @apply px-4 py-2 rounded-md bg-gray-800 border border-gray-700 focus:outline-none focus:border-netflix-red text-white;
+  .btn-secondary {
+    @apply bg-dark text-white px-4 py-2 rounded-md transition-all duration-300 ease-in-out hover:bg-darker;
+  }
+
+  .input-primary {
+    @apply bg-dark border-none px-5 py-3 rounded-md text-white text-base transition-all duration-300 ease-in-out focus:outline-none focus:bg-darker focus:ring-2 focus:ring-netflix-red;
   }
 
   .movie-card {
@@ -63,5 +82,61 @@
 
   .view-details-btn {
     @apply mt-auto bg-netflix-red text-white px-4 py-2 rounded text-center transition-colors duration-200 ease-in-out hover:bg-netflix-red-hover;
+  }
+
+  .nav-glass {
+    @apply bg-gray-900/80 backdrop-blur-glass border-b border-white/10;
+  }
+
+  .genre-filter-glass {
+    @apply bg-gray-800/70 backdrop-blur-glass border border-white/10;
+  }
+
+  .search-input-glass {
+    @apply bg-gray-800/70 backdrop-blur-glass border border-white/10;
+  }
+
+  .loading-spinner {
+    @apply w-12 h-12 border-3 border-netflix-red/10 rounded-full border-t-netflix-red animate-spin;
+  }
+
+  .genre-tag-hover {
+    @apply transition-all duration-300 ease-in-out hover:-translate-y-0.5 hover:shadow-lg;
+  }
+
+  .favorite-btn-pulse {
+    @apply animate-pulse;
+  }
+
+  .movie-grid-item {
+    @apply opacity-0 translate-y-5 animate-fadeInUp;
+  }
+
+  .custom-focus {
+    @apply focus:outline-none focus:ring-3 focus:ring-netflix-red/30;
+  }
+
+  .gradient-text {
+    @apply bg-gradient-text bg-clip-text text-transparent animate-gradientFlow;
+  }
+
+  .custom-button {
+    @apply relative overflow-hidden;
+  }
+
+  .custom-button::after {
+    @apply content-[''] absolute top-1/2 left-1/2 w-0 h-0 bg-white/20 rounded-full -translate-x-1/2 -translate-y-1/2 transition-all duration-600 ease-in-out;
+  }
+
+  .custom-button:hover::after {
+    @apply w-[300px] h-[300px];
+  }
+
+  .movie-content-fade {
+    @apply bg-gradient-to-b from-transparent to-gray-900/90 transition-opacity duration-300;
+  }
+
+  .genre-scroll {
+    @apply max-h-[calc(100vh-200px)] overflow-y-auto scrollbar-thin scrollbar-thumb-netflix-red scrollbar-track-darker;
   }
 } 
