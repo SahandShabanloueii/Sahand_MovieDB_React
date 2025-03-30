@@ -22,6 +22,7 @@ export const translations = {
         year: "Year",
         home: "Home",
         favorites: "Favorites",
+        filterByRating: "Filter by Rating",
         genres: {
             action: "Action",
             adventure: "Adventure",
@@ -68,6 +69,7 @@ export const translations = {
         year: "سال",
         home: "خانه",
         favorites: "مورد علاقه‌ها",
+        filterByRating: "فیلتر بر اساس امتیاز",
         genres: {
             action: "اکشن",
             adventure: "ماجراجویی",

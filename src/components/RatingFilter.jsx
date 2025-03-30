@@ -1,35 +1,34 @@
 import React from 'react';
 import { useLanguage } from '../contexts/LanguageContext';
 
-const YearRangeFilter = ({ onYearRangeChange, selectedRange }) => {
+const RatingFilter = ({ onRatingRangeChange, selectedRange }) => {
     const { translations } = useLanguage();
-    const currentYear = new Date().getFullYear();
-    const years = Array.from({ length: currentYear - 1900 + 1 }, (_, i) => currentYear - i);
+    const ratings = Array.from({ length: 11 }, (_, i) => i); // 0 to 10
 
-    const handleStartYearChange = (e) => {
-        const startYear = parseInt(e.target.value);
-        onYearRangeChange({ start: startYear, end: selectedRange.end });
+    const handleStartRatingChange = (e) => {
+        const startRating = parseFloat(e.target.value);
+        onRatingRangeChange({ start: startRating, end: selectedRange.end });
     };
 
-    const handleEndYearChange = (e) => {
-        const endYear = parseInt(e.target.value);
-        onYearRangeChange({ start: selectedRange.start, end: endYear });
+    const handleEndRatingChange = (e) => {
+        const endRating = parseFloat(e.target.value);
+        onRatingRangeChange({ start: selectedRange.start, end: endRating });
     };
 
     return (
         <div className="bg-darker shadow-lg p-6 rounded-lg mb-6">
-            <h3 className="text-white text-xl font-semibold mb-4">{translations.filterByYear}</h3>
+            <h3 className="text-white text-xl font-semibold mb-4">{translations.filterByRating}</h3>
             <div className="flex flex-col gap-4">
                 <div className="flex flex-col gap-2">
                     <label className="text-gray-300 text-sm">{translations.from}:</label>
                     <select 
                         value={selectedRange.start} 
-                        onChange={handleStartYearChange}
+                        onChange={handleStartRatingChange}
                         className="bg-darker text-white px-4 py-2 rounded-md border border-gray-700 focus:outline-none focus:border-netflix-red focus:ring-1 focus:ring-netflix-red"
                     >
-                        {years.map(year => (
-                            <option key={year} value={year}>
-                                {year}
+                        {ratings.map(rating => (
+                            <option key={rating} value={rating}>
+                                {rating} ★
                             </option>
                         ))}
                     </select>
@@ -38,12 +37,12 @@ const YearRangeFilter = ({ onYearRangeChange, selectedRange }) => {
                     <label className="text-gray-300 text-sm">{translations.to}:</label>
                     <select 
                         value={selectedRange.end} 
-                        onChange={handleEndYearChange}
+                        onChange={handleEndRatingChange}
                         className="bg-darker text-white px-4 py-2 rounded-md border border-gray-700 focus:outline-none focus:border-netflix-red focus:ring-1 focus:ring-netflix-red"
                     >
-                        {years.map(year => (
-                            <option key={year} value={year}>
-                                {year}
+                        {ratings.map(rating => (
+                            <option key={rating} value={rating}>
+                                {rating} ★
                             </option>
                         ))}
                     </select>
@@ -53,4 +52,4 @@ const YearRangeFilter = ({ onYearRangeChange, selectedRange }) => {
     );
 };
 
-export default YearRangeFilter; 
+export default RatingFilter; 

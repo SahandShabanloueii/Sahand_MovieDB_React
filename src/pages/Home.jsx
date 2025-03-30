@@ -1,6 +1,7 @@
 import MovieCard from "../components/MovieCard";
 import GenreFilter from "../components/GenreFilter";
 import YearRangeFilter from "../components/YearRangeFilter";
+import RatingFilter from "../components/RatingFilter";
 import { useState, useEffect } from "react";
 import { getPopularMovies, searchMovies, getMoviesByGenre, getGenres, getMoviesByYearRange, getMoviesByGenreAndYear } from "../services/api";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -17,6 +18,10 @@ function Home() {
     const [yearRange, setYearRange] = useState({
         start: new Date().getFullYear() - 10,
         end: new Date().getFullYear()
+    });
+    const [ratingRange, setRatingRange] = useState({
+        start: 0,
+        end: 10
     });
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
@@ -39,7 +44,7 @@ function Home() {
 
     useEffect(() => {
         loadMovies();
-    }, [currentPage, selectedGenres, yearRange]);
+    }, [currentPage, selectedGenres, yearRange, ratingRange]);
 
     const loadMovies = async () => {
         try {
@@ -50,6 +55,7 @@ function Home() {
                 searchQuery,
                 selectedGenres,
                 yearRange,
+                ratingRange,
                 currentPage
             });
             
@@ -76,8 +82,14 @@ function Home() {
                 response = await getPopularMovies(currentPage);
             }
 
-            console.log('Movies loaded:', response.results.length);
-            setMovies(response.results);
+            // Filter movies by rating range
+            const filteredMovies = response.results.filter(movie => 
+                movie.vote_average >= ratingRange.start && 
+                movie.vote_average <= ratingRange.end
+            );
+
+            console.log('Movies loaded:', filteredMovies.length);
+            setMovies(filteredMovies);
             setTotalPages(response.total_pages);
             setError(null);
         } catch (error) {
@@ -116,6 +128,11 @@ function Home() {
         setCurrentPage(1);
     };
 
+    const handleRatingRangeChange = (newRange) => {
+        setRatingRange(newRange);
+        setCurrentPage(1);
+    };
+
     return (
         <ErrorBoundary>
             <div className="min-h-screen bg-background p-4 md:p-4">
@@ -129,6 +146,10 @@ function Home() {
                         <YearRangeFilter
                             selectedRange={yearRange}
                             onYearRangeChange={handleYearRangeChange}
+                        />
+                        <RatingFilter
+                            selectedRange={ratingRange}
+                            onRatingRangeChange={handleRatingRangeChange}
                         />
                     </div>
                     <div className="flex-grow">
