@@ -5,7 +5,6 @@ import { useState, useEffect } from "react";
 import { getPopularMovies, searchMovies, getMoviesByGenre, getGenres, getMoviesByYearRange, getMoviesByGenreAndYear } from "../services/api";
 import { useLanguage } from "../contexts/LanguageContext";
 import ErrorBoundary from "../components/ErrorBoundary";
-import "../css/Home.css";
 
 function Home() {
     const { translations } = useLanguage();
@@ -119,9 +118,9 @@ function Home() {
 
     return (
         <ErrorBoundary>
-            <div className="home-container">
-                <div className="content-wrapper">
-                    <div className="sidebar">
+            <div className="min-h-screen bg-background-gray p-8 md:p-4">
+                <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-8">
+                    <div className="w-full lg:w-[300px] lg:flex-shrink-0">
                         <GenreFilter
                             genres={genres}
                             selectedGenres={selectedGenres}
@@ -132,50 +131,59 @@ function Home() {
                             onYearRangeChange={handleYearRangeChange}
                         />
                     </div>
-                    <div className="main-content">
-                        <div className="search-section">
-                            <form onSubmit={handleSearch}>
+                    <div className="flex-grow">
+                        <div className="mb-8">
+                            <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4">
                                 <input
                                     type="text"
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                     placeholder={translations.search}
-                                    className="search-input"
+                                    className="flex-1 bg-gray-800 border-none px-5 py-3 rounded-md text-white text-base transition-all duration-300 ease-in-out focus:outline-none focus:bg-gray-700 focus:ring-2 focus:ring-netflix-red"
                                 />
-                                <button type="submit" className="search-button">
+                                <button 
+                                    type="submit" 
+                                    className="bg-netflix-red text-white px-6 py-3 rounded-md text-base transition-all duration-300 ease-in-out hover:bg-netflix-red-hover hover:-translate-y-0.5 md:w-auto w-full"
+                                >
                                     {translations.searchButton}
                                 </button>
                             </form>
                         </div>
 
                         {loading ? (
-                            <div className="loading-spinner"></div>
+                            <div className="flex justify-center items-center min-h-[400px]">
+                                <div className="w-12 h-12 border-4 border-gray-800 border-t-netflix-red rounded-full animate-spin"></div>
+                            </div>
                         ) : error ? (
-                            <div className="error-message">{error}</div>
+                            <div className="flex justify-center items-center min-h-[50vh]">
+                                <div className="text-netflix-red text-xl text-center">{error}</div>
+                            </div>
                         ) : (
                             <>
-                                <div className="movie-grid">
+                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 py-4">
                                     {movies.map((movie) => (
-                                        <MovieCard key={movie.id} movie={movie} />
+                                        <div key={movie.id} className="opacity-0 translate-y-5 animate-fadeInUp">
+                                            <MovieCard movie={movie} />
+                                        </div>
                                     ))}
                                 </div>
 
                                 {totalPages > 1 && (
-                                    <div className="pagination">
+                                    <div className="flex justify-center items-center gap-4 mt-8 p-4">
                                         <button
                                             onClick={() => handlePageChange(currentPage - 1)}
                                             disabled={currentPage === 1}
-                                            className="pagination-button"
+                                            className="bg-netflix-red text-white px-4 py-2 rounded-md transition-colors duration-300 ease-in-out hover:bg-netflix-red-hover disabled:bg-gray-600 disabled:cursor-not-allowed"
                                         >
                                             Previous
                                         </button>
-                                        <span className="page-info">
+                                        <span className="text-white text-base">
                                             Page {currentPage} of {totalPages}
                                         </span>
                                         <button
                                             onClick={() => handlePageChange(currentPage + 1)}
                                             disabled={currentPage === totalPages}
-                                            className="pagination-button"
+                                            className="bg-netflix-red text-white px-4 py-2 rounded-md transition-colors duration-300 ease-in-out hover:bg-netflix-red-hover disabled:bg-gray-600 disabled:cursor-not-allowed"
                                         >
                                             Next
                                         </button>
