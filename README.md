@@ -13,8 +13,6 @@ This project is a React-based web application built with Vite and TailwindCSS th
 - **Responsive UI:** Built with React and TailwindCSS for a sleek, modern look.
 - **Fast Development:** Powered by Vite for lightning-fast HMR (Hot Module Replacement).
 
-## Project Structure
-
 ## Features
 
 - **Movie Search:** Find movies using free-text search.
