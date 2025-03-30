@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import "../css/MovieCard.css";
 
 function MovieCard({movie}) {
-    const { favorites, setFavorites } = useMovieContext();
+    const { favorites, addToFavorites, removeFromFavorites, isFavorite } = useMovieContext();
     const { translations } = useLanguage();
     const [genres, setGenres] = useState([]);
     const [movieGenres, setMovieGenres] = useState([]);
@@ -27,14 +27,12 @@ function MovieCard({movie}) {
         loadGenres();
     }, [movie.genre_ids]);
 
-    const isFavorite = favorites.some(fav => fav.id === movie.id);
-
     function onFavoriteClick(e) {
         e.preventDefault(); // Prevent navigation when clicking the favorite button
-        if (isFavorite) {
-            setFavorites(favorites.filter(fav => fav.id !== movie.id));
+        if (isFavorite(movie.id)) {
+            removeFromFavorites(movie.id);
         } else {
-            setFavorites([...favorites, movie]);
+            addToFavorites(movie);
         }
     }
 
@@ -50,7 +48,7 @@ function MovieCard({movie}) {
                         className="favorite-btn"
                         onClick={onFavoriteClick}
                     >
-                        {isFavorite ? "❤️" : "🤍"}
+                        {isFavorite(movie.id) ? "❤️" : "🤍"}
                     </button>
                 </div>
             </div>
