@@ -153,7 +153,7 @@ function Home() {
                         />
                     </div>
                     <div className="flex-grow">
-                        <div className="mb-8 p-2 bg-darker rounded-lg shadow-lg">
+                        <div className="m-4 p-2 bg-darker rounded-lg shadow-lg">
                             <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4">
                                 <input
                                     type="text"

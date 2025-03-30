@@ -27,7 +27,7 @@ function GenreFilter({ genres, selectedGenres, onGenreChange }) {
                 ))}
                 {genres.length > 4 && (
                     <button
-                        className="mt-2 text-netflix-red hover:text-netflix-red-hover text-sm font-medium transition-colors duration-200 border-2 border-dashed border-netflix-red"
+                        className="mt-2 text-netflix-red hover:text-netflix-red-hover text-sm font-medium transition-colors duration-200 border-2 border-dashed border-netflix-red rounded-md hover:bg-netflix-red hover:text-white"
                         onClick={() => setShowMore(!showMore)}
                     >
                         {showMore ? translations.showLess : translations.showMore}
