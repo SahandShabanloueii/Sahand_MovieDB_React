@@ -118,9 +118,9 @@ function Home() {
 
     return (
         <ErrorBoundary>
-            <div className="min-h-screen bg-background p-8 md:p-4">
+            <div className="min-h-screen bg-background p-4 md:p-4">
                 <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-8">
-                    <div className="w-full lg:w-[300px] lg:flex-shrink-0">
+                    <div className="rounded-lg p-4 w-full lg:w-[300px] lg:flex-shrink-0">
                         <GenreFilter
                             genres={genres}
                             selectedGenres={selectedGenres}
@@ -132,7 +132,7 @@ function Home() {
                         />
                     </div>
                     <div className="flex-grow">
-                        <div className="mb-8">
+                        <div className="mb-8 p-2 bg-darker rounded-lg shadow-lg">
                             <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4">
                                 <input
                                     type="text"
@@ -160,7 +160,7 @@ function Home() {
                             </div>
                         ) : (
                             <>
-                                <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 py-4">
+                                <div className="bg-darker p-4 rounded-lg grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                                     {movies.map((movie) => (
                                         <div key={movie.id} className="opacity-0 translate-y-5 animate-fadeInUp">
                                             <MovieCard movie={movie} />
@@ -169,7 +169,7 @@ function Home() {
                                 </div>
 
                                 {totalPages > 1 && (
-                                    <div className="flex justify-center items-center gap-4 mt-8 p-4">
+                                    <div className="flex justify-center items-center gap-4 mt-8 p-4 bg-darker rounded-lg shadow-lg">
                                         <button
                                             onClick={() => handlePageChange(currentPage - 1)}
                                             disabled={currentPage === 1}

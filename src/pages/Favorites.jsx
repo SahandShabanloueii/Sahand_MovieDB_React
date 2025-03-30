@@ -16,7 +16,7 @@ function Favorites() {
                         <p className="text-gray-300 text-lg">{favsSection.addFavorites}</p>
                     </div>
                 ) : (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                    <div className="bg-darker p-8 rounded-lg grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
                         {favorites.map(movie => (
                             <div key={movie.id} className="opacity-0 translate-y-5 animate-fadeInUp">
                                 <MovieCard movie={movie} />

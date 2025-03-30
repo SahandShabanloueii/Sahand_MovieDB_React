@@ -14,7 +14,7 @@ function App() {
         <div className="min-h-screen bg-background flex flex-col">
           <NavBar />
           <ErrorBoundary>
-            <main className="flex-1">
+            <main className="flex-1 pt-16">
               <Routes>
                 <Route path="/" element={<Home />} />
                 <Route path="/favorites" element={<Favorites />} />

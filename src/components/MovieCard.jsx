@@ -36,7 +36,7 @@ function MovieCard({movie}) {
     }
 
     return (
-        <Link to={`/movie/${movie.id}`} className="block bg-dark-gray rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+        <Link to={`/movie/${movie.id}`} className="shadow-lg block border-2 border-solid border-dark rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
             <div className="relative">
                 <img 
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} 
