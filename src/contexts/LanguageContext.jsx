@@ -47,8 +47,11 @@ export const translations = {
             noFavorites: "No favorites yet",
             addFavorites: "Add some movies to your favorites list"
         },
-        showMore: "Show More",
-        showLess: "Show Less"
+        showMore: "⇩ Show More ⇩",
+        showLess: "⇧ Show Less ⇧",
+        filterByYear: "Filter by Year",
+        from: "From",
+        to: "To"
     },
     fa: {
         search: "جستجوی فیلم...",
@@ -90,8 +93,11 @@ export const translations = {
             noFavorites: "هیچ مورد علاقه‌ای وجود ندارد",
             addFavorites: "فیلم‌هایی را به لیست مورد علاقه خود اضافه کنید"
         },
-        showMore: "نمایش بیشتر",
-        showLess: "نمایش کمتر"
+        showMore: "⇩ نمایش بیشتر ⇩",
+        showLess: "⇧ نمایش کمتر ⇧",
+        filterByYear: "فیلتر بر اساس سال",
+        from: "از",
+        to: "تا"
     }
 };
 
