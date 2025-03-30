@@ -31,7 +31,20 @@ export const getMoviesByGenre = async (genreId, page = 1) => {
     );
     return response.json();
 };
-  
+
+export const getMoviesByYearRange = async (startYear, endYear, page = 1) => {
+    const response = await fetch(
+        `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&primary_release_date.gte=${startYear}-01-01&primary_release_date.lte=${endYear}-12-31&page=${page}`
+    );
+    return response.json();
+};
+
+export const getMoviesByGenreAndYear = async (genreId, startYear, endYear, page = 1) => {
+    const response = await fetch(
+        `${BASE_URL}/discover/movie?api_key=${API_KEY}&language=en-US&with_genres=${genreId}&primary_release_date.gte=${startYear}-01-01&primary_release_date.lte=${endYear}-12-31&page=${page}`
+    );
+    return response.json();
+};
 
 export async function getMovieDetails(movieId) {
     const response = await fetch(

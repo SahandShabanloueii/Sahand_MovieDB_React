@@ -1,7 +1,8 @@
 import MovieCard from "../components/MovieCard";
 import GenreFilter from "../components/GenreFilter";
+import YearRangeFilter from "../components/YearRangeFilter";
 import { useState, useEffect } from "react";
-import { getPopularMovies, searchMovies, getMoviesByGenre, getGenres } from "../services/api";
+import { getPopularMovies, searchMovies, getMoviesByGenre, getGenres, getMoviesByYearRange, getMoviesByGenreAndYear } from "../services/api";
 import { useLanguage } from "../contexts/LanguageContext";
 import ErrorBoundary from "../components/ErrorBoundary";
 import "../css/Home.css";
@@ -14,6 +15,10 @@ function Home() {
     const [error, setError] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [selectedGenres, setSelectedGenres] = useState([]);
+    const [yearRange, setYearRange] = useState({
+        start: new Date().getFullYear() - 10,
+        end: new Date().getFullYear()
+    });
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
 
@@ -35,7 +40,7 @@ function Home() {
 
     useEffect(() => {
         loadMovies();
-    }, [currentPage, selectedGenres]);
+    }, [currentPage, selectedGenres, yearRange]);
 
     const loadMovies = async () => {
         try {
@@ -45,20 +50,29 @@ function Home() {
             console.log('Loading movies with:', {
                 searchQuery,
                 selectedGenres,
+                yearRange,
                 currentPage
             });
             
             if (searchQuery) {
-                if (selectedGenres.length > 0){
-                    // the api that I'm using does not support both searching and filtering with genres
-                    // but this is where we put the function like serachAndfilterByGenres()
-                    response = await searchMovies(searchQuery, currentPage);
-                } else {
-                    response = await searchMovies(searchQuery, currentPage);
-                }
-                
+                response = await searchMovies(searchQuery, currentPage);
             } else if (selectedGenres.length > 0) {
-                response = await getMoviesByGenre(selectedGenres.join(","), currentPage);
+                if (yearRange.start !== yearRange.end) {
+                    response = await getMoviesByGenreAndYear(
+                        selectedGenres.join(","),
+                        yearRange.start,
+                        yearRange.end,
+                        currentPage
+                    );
+                } else {
+                    response = await getMoviesByGenre(selectedGenres.join(","), currentPage);
+                }
+            } else if (yearRange.start !== yearRange.end) {
+                response = await getMoviesByYearRange(
+                    yearRange.start,
+                    yearRange.end,
+                    currentPage
+                );
             } else {
                 response = await getPopularMovies(currentPage);
             }
@@ -98,6 +112,11 @@ function Home() {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     };
 
+    const handleYearRangeChange = (newRange) => {
+        setYearRange(newRange);
+        setCurrentPage(1);
+    };
+
     return (
         <ErrorBoundary>
             <div className="home-container">
@@ -107,6 +126,10 @@ function Home() {
                             genres={genres}
                             selectedGenres={selectedGenres}
                             onGenreChange={handleGenreChange}
+                        />
+                        <YearRangeFilter
+                            selectedRange={yearRange}
+                            onYearRangeChange={handleYearRangeChange}
                         />
                     </div>
                     <div className="main-content">
