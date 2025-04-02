@@ -31,7 +31,7 @@ function NavBar() {
                             className="bg-zinc-900 text-gray-300 hover:text-white px-4 py-2 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-800"
                             title={language === 'en' ? 'Switch to Persian' : 'Switch to English'}
                         >
-                            {language === 'en' ? 'en 🇺🇸' : 'fa 🇮🇷'}
+                            {language === 'en' ? 'en' : 'fa'}
                         </button>
                     </div>
                 </div>
