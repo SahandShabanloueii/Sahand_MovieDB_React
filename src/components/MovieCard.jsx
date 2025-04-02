@@ -36,7 +36,7 @@ function MovieCard({movie}) {
     }
 
     return (
-        <Link to={`/movie/${movie.id}`} className="shadow-lg block border-2 border-solid border-dark rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105">
+        <Link to={`/movie/${movie.id}`} className="shadow-lg block border-2 border-solid border-dark rounded-lg overflow-hidden transition-transform duration-300 hover:scale-105 h-full flex flex-col">
             <div className="relative">
                 <img 
                     src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} 
@@ -52,15 +52,17 @@ function MovieCard({movie}) {
                     </button>
                 </div>
             </div>
-            <div className="p-4">
-                <h3 className="text-white text-lg font-semibold mb-2 line-clamp-2">
-                    {movie.title}
-                </h3>
-                <div className="flex justify-between items-center text-gray-400 text-sm mb-2">
-                    <span>{translations.year}: {movie.release_date?.split("-")[0]}</span>
-                    <span>★ {movie.vote_average.toFixed(1)}</span>
+            <div className="p-4 flex flex-col flex-grow">
+                <div className="flex-grow">
+                    <h3 className="text-white text-lg font-semibold mb-2 line-clamp-2">
+                        {movie.title}
+                    </h3>
+                    <div className="flex justify-between items-center text-gray-400 text-sm mb-2">
+                        <span>{translations.year}: {movie.release_date?.split("-")[0]}</span>
+                        <span>★ {movie.vote_average.toFixed(1)}</span>
+                    </div>
                 </div>
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-2 mt-auto">
                     {movieGenres.slice(0, 3).map(genre => (
                         <span key={genre.id} className="bg-netflix-red bg-opacity-20 text-netflix-red px-2 py-1 rounded-full text-xs">
                             {genre.name}
