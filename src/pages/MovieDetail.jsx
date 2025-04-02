@@ -61,12 +61,14 @@ function MovieDetail() {
             <div className="min-h-screen bg-background py-8 px-4">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-col md:flex-row gap-8">
-                        <div className="md:w-1/3">
-                            <img 
-                                src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} 
-                                alt={movie.title}
-                                className="w-full rounded-lg shadow-lg"
-                            />
+                        <div className="md:w-1/3 h-full">
+                            <div className="sticky top-24">
+                                <img 
+                                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`} 
+                                    alt={movie.title}
+                                    className="w-full rounded-lg shadow-lg object-cover"
+                                />
+                            </div>
                         </div>
                         <div className="md:w-2/3">
                             <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">{movie.title}</h1>
