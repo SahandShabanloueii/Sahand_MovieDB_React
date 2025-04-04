@@ -2,7 +2,7 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { useState } from "react";
 
 function GenreFilter({ genres, selectedGenres, onGenreChange }) {
-    const { translations } = useLanguage();
+    const { language, translations } = useLanguage();
     const genreNames = translations.genres;
     const [showMore, setShowMore] = useState(false);
 
@@ -15,7 +15,9 @@ function GenreFilter({ genres, selectedGenres, onGenreChange }) {
                 {displayedGenres.map(genre => (
                     <button
                         key={genre.id}
-                        className={`border-2 border-solid border-dark shadow-lg bg-gray-800/50 px-4 py-2 rounded-md text-left transition-all duration-200 ${
+                        className={`border-2 border-solid border-dark shadow-lg bg-gray-800/50 px-4 py-2 rounded-md ${
+                            language === 'en' ? 'text-left' : 'text-right'
+                        } transition-all duration-200 ${
                             selectedGenres.includes(genre.id)
                                 ? 'bg-netflix-red text-white hover:bg-netflix-red-hover'
                                 : 'bg-darker text-gray-300 hover:bg-gray-700 hover:text-white'
@@ -27,7 +29,7 @@ function GenreFilter({ genres, selectedGenres, onGenreChange }) {
                 ))}
                 {genres.length > 4 && (
                     <button
-                        className="mt-2 text-netflix-red hover:text-netflix-red-hover text-sm font-medium transition-colors duration-200 border-2 border-dashed border-netflix-red rounded-md hover:bg-netflix-red hover:text-white"
+                        className="px-4 py-2 mt-2 text-netflix-red hover:text-netflix-red-hover text-sm font-medium transition-colors duration-200 border-2 border-dashed border-netflix-red rounded-md hover:bg-netflix-red hover:text-white"
                         onClick={() => setShowMore(!showMore)}
                     >
                         {showMore ? translations.showLess : translations.showMore}

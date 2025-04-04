@@ -9,6 +9,7 @@ function MovieCard({movie}) {
     const { translations } = useLanguage();
     const [genres, setGenres] = useState([]);
     const [movieGenres, setMovieGenres] = useState([]);
+    const genreNames = translations.genres;
 
     useEffect(() => {
         const loadGenres = async () => {
@@ -64,12 +65,12 @@ function MovieCard({movie}) {
                 </div>
                 <div className="flex flex-wrap gap-2 mt-auto">
                     {movieGenres.slice(0, 3).map(genre => (
-                        <span key={genre.id} className="bg-netflix-red bg-opacity-20 text-netflix-red px-2 py-1 rounded-full text-xs">
-                            {genre.name}
+                        <span key={genre.id} className="bg-red-500 bg-opacity-10 text-netflix-red px-2 py-1 rounded-full text-xs">
+                            {genreNames[genre.name.toLowerCase()] || genre.name}
                         </span>
                     ))}
                     {movieGenres.length > 3 && (
-                        <span className="bg-netflix-red bg-opacity-20 text-netflix-red px-2 py-1 rounded-full text-xs">
+                        <span className="bg-netflix-red bg-opacity-10 text-netflix-red px-2 py-1 rounded-full text-xs">
                             +{movieGenres.length - 3}
                         </span>
                     )}
