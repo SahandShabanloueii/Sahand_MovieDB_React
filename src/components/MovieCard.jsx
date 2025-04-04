@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 function MovieCard({movie}) {
     const { favorites, addToFavorites, removeFromFavorites, isFavorite } = useMovieContext();
-    const { translations } = useLanguage();
+    const { translations, language } = useLanguage();
     const [genres, setGenres] = useState([]);
     const [movieGenres, setMovieGenres] = useState([]);
     const genreNames = translations.genres;
@@ -46,7 +46,7 @@ function MovieCard({movie}) {
                 />
                 <div className="absolute inset-0 bg-black bg-opacity-0 hover:bg-opacity-40 transition-all duration-300 flex items-center justify-center">
                     <button 
-                        className="absolute top-2 right-2 bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition-all duration-300"
+                        className={`${language === 'fa' ? 'left-2' : 'right-2'} absolute top-2 bg-black bg-opacity-50 p-2 rounded-full hover:bg-opacity-75 transition-all duration-300`}
                         onClick={onFavoriteClick}
                     >
                         {isFavorite(movie.id) ? "❤️" : "🤍"}
