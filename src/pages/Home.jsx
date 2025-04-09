@@ -199,7 +199,7 @@ function Home() {
                                             Previous
                                         </button>
                                         <span className="text-white text-base">
-                                            Page {currentPage} of {totalPages}
+                                            Page {currentPage.toLocaleString()} of {totalPages.toLocaleString()}
                                         </span>
                                         <button
                                             onClick={() => handlePageChange(currentPage + 1)}
