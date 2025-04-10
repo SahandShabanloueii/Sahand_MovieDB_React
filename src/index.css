@@ -25,6 +25,12 @@
   ::-webkit-scrollbar-thumb:hover {
     @apply bg-netflix-red-hover;
   }
+
+  ::selection {
+    color: white;
+    @apply bg-netflix-red;
+  }
+
 }
 
 @layer components {
