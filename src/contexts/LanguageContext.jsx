@@ -23,6 +23,8 @@ export const translations = {
         home: "Home",
         favorites: "Favorites",
         filterByRating: "Filter by Rating",
+        filterMovies: "Filter Movies",
+        closeFilters: "Close Filters",
         genres: {
             action: "Action",
             adventure: "Adventure",
@@ -70,6 +72,8 @@ export const translations = {
         home: "خانه",
         favorites: "مورد علاقه‌ها",
         filterByRating: "فیلتر بر اساس امتیاز",
+        filterMovies: "فیلتر فیلم‌ها",
+        closeFilters: "بستن فیلترها",
         genres: {
             action: "اکشن",
             adventure: "ماجراجویی",

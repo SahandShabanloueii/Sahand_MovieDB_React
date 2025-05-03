@@ -2,6 +2,7 @@ import MovieCard from "../components/MovieCard";
 import GenreFilter from "../components/GenreFilter";
 import YearRangeFilter from "../components/YearRangeFilter";
 import RatingFilter from "../components/RatingFilter";
+import FilterToggle from "../components/FilterToggle";
 import { useState, useEffect } from "react";
 import { getPopularMovies, searchMovies, getMoviesByGenre, getGenres, getMoviesByYearRange, getMoviesByGenreAndYear } from "../services/api";
 import { useLanguage } from "../contexts/LanguageContext";
@@ -25,6 +26,7 @@ function Home() {
     });
     const [currentPage, setCurrentPage] = useState(1);
     const [totalPages, setTotalPages] = useState(1);
+    const [isFilterOpen, setIsFilterOpen] = useState(false);
 
     useEffect(() => {
         const loadInitialData = async () => {
@@ -136,82 +138,86 @@ function Home() {
     return (
         <ErrorBoundary>
             <div className="min-h-screen bg-background p-4 md:p-4">
-                <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-8">
-                    <div className="rounded-lg p-4 w-full lg:w-[300px] lg:flex-shrink-0">
-                        <GenreFilter
-                            genres={genres}
-                            selectedGenres={selectedGenres}
-                            onGenreChange={handleGenreChange}
-                        />
-                        <YearRangeFilter
-                            selectedRange={yearRange}
-                            onYearRangeChange={handleYearRangeChange}
-                        />
-                        <RatingFilter
-                            selectedRange={ratingRange}
-                            onRatingRangeChange={handleRatingRangeChange}
-                        />
+                <div className="max-w-[1400px] mx-auto">
+                    <div className="m-4 p-2 bg-darker rounded-lg shadow-lg">
+                        <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4">
+                            <input
+                                type="text"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                                placeholder={translations.search}
+                                className="flex-1 bg-gray-800 border-none px-5 py-3 rounded-md text-white text-base transition-all duration-300 ease-in-out focus:outline-none focus:bg-gray-700 focus:ring-2 focus:ring-netflix-red"
+                            />
+                            <button 
+                                type="submit" 
+                                className="bg-netflix-red text-white px-6 py-3 rounded-md text-base transition-all duration-300 ease-in-out hover:bg-netflix-red-hover hover:-translate-y-0.5 md:w-auto w-full"
+                            >
+                                {translations.searchButton}
+                            </button>
+                        </form>
                     </div>
-                    <div className="flex-grow">
-                        <div className="m-4 p-2 bg-darker rounded-lg shadow-lg">
-                            <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4">
-                                <input
-                                    type="text"
-                                    value={searchQuery}
-                                    onChange={(e) => setSearchQuery(e.target.value)}
-                                    placeholder={translations.search}
-                                    className="flex-1 bg-gray-800 border-none px-5 py-3 rounded-md text-white text-base transition-all duration-300 ease-in-out focus:outline-none focus:bg-gray-700 focus:ring-2 focus:ring-netflix-red"
+                    <div className="max-w-[1400px] mx-auto flex flex-col lg:flex-row gap-8">
+                        <div className="rounded-lg px-4 w-full lg:w-[300px] lg:flex-shrink-0">
+                            <FilterToggle isOpen={isFilterOpen} onToggle={() => setIsFilterOpen(!isFilterOpen)} />
+                            <div className={`lg:block ${isFilterOpen ? 'block' : 'hidden'}`}>
+                                <GenreFilter
+                                    genres={genres}
+                                    selectedGenres={selectedGenres}
+                                    onGenreChange={handleGenreChange}
                                 />
-                                <button 
-                                    type="submit" 
-                                    className="bg-netflix-red text-white px-6 py-3 rounded-md text-base transition-all duration-300 ease-in-out hover:bg-netflix-red-hover hover:-translate-y-0.5 md:w-auto w-full"
-                                >
-                                    {translations.searchButton}
-                                </button>
-                            </form>
+                                <YearRangeFilter
+                                    selectedRange={yearRange}
+                                    onYearRangeChange={handleYearRangeChange}
+                                />
+                                <RatingFilter
+                                    selectedRange={ratingRange}
+                                    onRatingRangeChange={handleRatingRangeChange}
+                                />
+                            </div>
                         </div>
-
-                        {loading ? (
-                            <div className="flex justify-center items-center min-h-[400px]">
-                                <div className="w-12 h-12 border-4 border-gray-800 border-t-netflix-red rounded-full animate-spin"></div>
-                            </div>
-                        ) : error ? (
-                            <div className="flex justify-center items-center min-h-[50vh]">
-                                <div className="text-netflix-red text-xl text-center">{error}</div>
-                            </div>
-                        ) : (
-                            <>
-                                <div className="bg-darker p-4 rounded-lg grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
-                                    {movies.map((movie) => (
-                                        <div key={movie.id} className="opacity-0 translate-y-5 animate-fadeInUp">
-                                            <MovieCard movie={movie} />
-                                        </div>
-                                    ))}
+                        <div className="flex-grow">
+                            {loading ? (
+                                <div className="flex justify-center items-center min-h-[400px]">
+                                    <div className="w-12 h-12 border-4 border-gray-800 border-t-netflix-red rounded-full animate-spin"></div>
                                 </div>
-
-                                {totalPages > 1 && (
-                                    <div className="flex justify-center items-center gap-4 mt-8 p-4 bg-darker rounded-lg shadow-lg">
-                                        <button
-                                            onClick={() => handlePageChange(currentPage - 1)}
-                                            disabled={currentPage === 1}
-                                            className="bg-netflix-red text-white px-4 py-2 rounded-md transition-colors duration-300 ease-in-out hover:bg-netflix-red-hover disabled:bg-gray-600 disabled:cursor-not-allowed"
-                                        >
-                                            Previous
-                                        </button>
-                                        <span className="text-white text-base">
-                                            Page {currentPage.toLocaleString()} of {totalPages.toLocaleString()}
-                                        </span>
-                                        <button
-                                            onClick={() => handlePageChange(currentPage + 1)}
-                                            disabled={currentPage === totalPages}
-                                            className="bg-netflix-red text-white px-4 py-2 rounded-md transition-colors duration-300 ease-in-out hover:bg-netflix-red-hover disabled:bg-gray-600 disabled:cursor-not-allowed"
-                                        >
-                                            Next
-                                        </button>
+                            ) : error ? (
+                                <div className="flex justify-center items-center min-h-[50vh]">
+                                    <div className="text-netflix-red text-xl text-center">{error}</div>
+                                </div>
+                            ) : (
+                                <>
+                                    <div className="bg-darker p-4 rounded-lg grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+                                        {movies.map((movie) => (
+                                            <div key={movie.id} className="opacity-0 translate-y-5 animate-fadeInUp">
+                                                <MovieCard movie={movie} />
+                                            </div>
+                                        ))}
                                     </div>
-                                )}
-                            </>
-                        )}
+
+                                    {totalPages > 1 && (
+                                        <div className="flex justify-center items-center gap-4 mt-8 p-4 bg-darker rounded-lg shadow-lg">
+                                            <button
+                                                onClick={() => handlePageChange(currentPage - 1)}
+                                                disabled={currentPage === 1}
+                                                className="bg-netflix-red text-white px-4 py-2 rounded-md transition-colors duration-300 ease-in-out hover:bg-netflix-red-hover disabled:bg-gray-600 disabled:cursor-not-allowed"
+                                            >
+                                                Previous
+                                            </button>
+                                            <span className="text-white text-base">
+                                                Page {currentPage.toLocaleString()} of {totalPages.toLocaleString()}
+                                            </span>
+                                            <button
+                                                onClick={() => handlePageChange(currentPage + 1)}
+                                                disabled={currentPage === totalPages}
+                                                className="bg-netflix-red text-white px-4 py-2 rounded-md transition-colors duration-300 ease-in-out hover:bg-netflix-red-hover disabled:bg-gray-600 disabled:cursor-not-allowed"
+                                            >
+                                                Next
+                                            </button>
+                                        </div>
+                                    )}
+                                </>
+                            )}
+                        </div>
                     </div>
                 </div>
             </div>
