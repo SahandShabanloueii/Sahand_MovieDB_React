@@ -4,6 +4,7 @@ import Favorites from "./pages/Favorites";
 import MovieDetail from "./pages/MovieDetail";
 import NavBar from "./components/NavBar";
 import Footer from "./components/Footer";
+import InstallPrompt from "./components/InstallPrompt";
 import { MovieProvider } from "./contexts/MovieContext";
 import { LanguageProvider } from "./contexts/LanguageContext";
 import ErrorBoundary from "./components/ErrorBoundary";
@@ -24,6 +25,7 @@ function App() {
             </main>
           </ErrorBoundary>
           <Footer />
+          <InstallPrompt />
         </div>
       </MovieProvider>
     </LanguageProvider>

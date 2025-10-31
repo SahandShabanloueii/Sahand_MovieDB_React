@@ -54,7 +54,12 @@ export const translations = {
         showLess: "⇧ Show Less ⇧",
         filterByYear: "Filter by Year",
         from: "From",
-        to: "To"
+        to: "To",
+        installPrompt: {
+            title: "Install Sahand Movies",
+            description: "Add to your home screen for quick access",
+            button: "Install"
+        }
     },
     fa: {
         search: "جستجوی فیلم...",
@@ -103,7 +108,12 @@ export const translations = {
         showLess: "⇧ نمایش کمتر ⇧",
         filterByYear: "فیلتر بر اساس سال",
         from: "از",
-        to: "تا"
+        to: "تا",
+        installPrompt: {
+            title: "نصب وب اپلیکیشن",
+            description: "برای دسترسی سریع به صفحه اصلی اضافه کنید",
+            button: "نصب"
+        }
     }
 };
 
