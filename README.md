@@ -3,7 +3,8 @@
 This project is a React-based web application built with Vite and TailwindCSS that leverages [The Movie Database API](https://www.themoviedb.org) to search, filter, and display movie information. It provides a modern UI for browsing movies based on search queries, selected genres, and popular titles.
 
 
-![Sahand_MovieDB](https://github.com/user-attachments/assets/af670820-4459-4ef1-b289-6cdd6cab14c4)
+<img width="1407" height="954" alt="image" src="https://github.com/user-attachments/assets/9608e4e8-de5d-4892-adb4-2bd7cade2fb5" />
+
 
 
 ## Features
