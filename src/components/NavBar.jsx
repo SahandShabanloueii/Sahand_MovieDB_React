@@ -27,10 +27,10 @@ function NavBar() {
     };
 
     return (
-        <nav className={`bg-darker shadow-lg fixed z-10 transition-all duration-300 ${
+        <nav className={` shadow-lg fixed z-10 transition-all ease-in-out duration-300 ${
             isAtTop 
-                ? 'top-0 w-full left-0 right-0' 
-                : 'top-4 left-4 right-4 rounded-full'
+                ? 'top-0 w-full left-0 right-0 bg-darker' 
+                : 'top-2 left-4 right-4 rounded-3xl bg-darker/70 backdrop-blur-md'
         }`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className={`flex ${isRTL ? 'flex-row-reverse' : ''} justify-between items-center h-16`}>
@@ -61,19 +61,19 @@ function NavBar() {
                     <div className={`hidden md:flex items-center gap-6 ${isRTL ? 'flex-row-reverse' : ''}`}>
                         <Link 
                             to="/" 
-                            className="bg-zinc-900 text-gray-300 hover:text-white py-2 px-3 rounded-md text-lg font-medium transition-colors duration-200 hover:bg-gray-800"
+                            className="text-gray-300 hover:text-white py-2 px-3 rounded-md text-lg font-medium transition-colors duration-200 hover:bg-gray-800"
                         >
                             {translations.home}
                         </Link>
                         <Link 
                             to="/favorites" 
-                            className="bg-zinc-900 text-gray-300 hover:text-white py-2 px-3 rounded-md text-lg font-medium transition-colors duration-200 hover:bg-gray-800"
+                            className="text-gray-300 hover:text-white py-2 px-3 rounded-md text-lg font-medium transition-colors duration-200 hover:bg-gray-800"
                         >
                             {translations.favorites}
                         </Link>
                         <button
                             onClick={toggleLanguage}
-                            className="bg-zinc-900 text-gray-300 hover:text-white py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-800"
+                            className="text-gray-300 hover:text-white py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-800"
                             title={language === 'en' ? 'Switch to Persian' : 'Switch to English'}
                         >
                             {language === 'en' ? 'en' : 'fa'}
@@ -86,14 +86,14 @@ function NavBar() {
                     <div className={`px-2 pt-2 pb-3 space-y-1 ${isRTL ? 'text-right' : 'text-left'}`}>
                         <Link 
                             to="/" 
-                            className="block bg-zinc-900 text-gray-300 hover:text-white py-2 px-3 rounded-md text-lg font-medium transition-colors duration-200 hover:bg-gray-800"
+                            className="block text-gray-300 hover:text-white py-2 px-3 rounded-md text-lg font-medium transition-colors duration-200 hover:bg-gray-800"
                             onClick={() => setIsMenuOpen(false)}
                         >
                             {translations.home}
                         </Link>
                         <Link 
                             to="/favorites" 
-                            className="block bg-zinc-900 text-gray-300 hover:text-white py-2 px-3 rounded-md text-lg font-medium transition-colors duration-200 hover:bg-gray-800"
+                            className="block text-gray-300 hover:text-white py-2 px-3 rounded-md text-lg font-medium transition-colors duration-200 hover:bg-gray-800"
                             onClick={() => setIsMenuOpen(false)}
                         >
                             {translations.favorites}
@@ -103,7 +103,7 @@ function NavBar() {
                                 toggleLanguage();
                                 setIsMenuOpen(false);
                             }}
-                            className="w-full bg-zinc-900 text-gray-300 hover:text-white py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-800"
+                            className="w-full text-gray-300 hover:text-white py-2 px-4 rounded-md text-sm font-medium transition-colors duration-200 hover:bg-gray-800"
                             title={language === 'en' ? 'Switch to Persian' : 'Switch to English'}
                         >
                             {language === 'en' ? 'en' : 'fa'}
