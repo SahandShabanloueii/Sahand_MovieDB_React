@@ -1,19 +1,37 @@
 import { Link } from "react-router-dom";
 import { useLanguage } from '../contexts/LanguageContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function NavBar() {
     const { language, toggleLanguage } = useLanguage();
     const { translations } = useLanguage();
     const isRTL = language === 'fa';
     const [isMenuOpen, setIsMenuOpen] = useState(false);
+    const [isAtTop, setIsAtTop] = useState(true);
+
+    useEffect(() => {
+        const handleScroll = () => {
+            setIsAtTop(window.scrollY === 0);
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        handleScroll();
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
 
     const toggleMenu = () => {
         setIsMenuOpen(!isMenuOpen);
     };
 
     return (
-        <nav className="bg-darker shadow-lg fixed top-0 w-full z-10">
+        <nav className={`bg-darker shadow-lg fixed z-10 transition-all duration-300 ${
+            isAtTop 
+                ? 'top-0 w-full left-0 right-0' 
+                : 'top-4 left-4 right-4 rounded-full'
+        }`}>
             <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div className={`flex ${isRTL ? 'flex-row-reverse' : ''} justify-between items-center h-16`}>
                     <div className="flex-shrink-0">
